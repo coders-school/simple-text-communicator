@@ -1,0 +1,70 @@
+@startuml
+class Database {
+
++void connect()
++void disconnect()
+
+
+
+}
+
+enum Status{
+Available,
+BeRightBack,
+DoNotDisturb,
+Invisible,
+Unavailable
+}
+
+
+class User{
+
++ User(std::string name, std::string number, std::string password)
++ void addFriend(std::string friendNumber)
++ void setStatus(Status status)
++ void sendMessageTo(const User& user)
++ void blockUser(const User& user)
+
+
+- std::string userName_;
+- std::string userNumber_;
+- std::string password_
+- Status status_
+}
+
+User *-- Status
+
+class Server{
+- std::vector<User> connectedUsers_
+- std::string ipAddress_
+
+Server(const std::string& ipAddress)
++ void loadUsers()
+
+}
+Server --> User
+
+class Application{
+
+- Database& database_
+- Server& server_
+- void connectToServer()
+- void disconnectFromServer()
+- std::vector<User> users_
++ void run()
++ void login()
++ void logout()
++ void addUser(const User& user)
++ void deleteUser(const User& user)
+
+
++Application(Database& db, Server& server)
+}
+
+Application o-- Server
+Application o-- Database
+Application --> User
+
+
+
+@enduml
