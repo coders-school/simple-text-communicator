@@ -1,0 +1,90 @@
+@startuml
+class Database {
+
++void connect()
++void disconnect()
+
++ ErrorCode addUser(const User& user)
++ ErrorCode addUserFriend(const User& user)
++ ErrorCode saveMessage(const User&, const Message&)
+
+}
+Database --> ErrorCode
+
+enum Status{
+Available,
+BeRightBack,
+DoNotDisturb,
+Invisible,
+Unavailable
+}
+
+enum ErrorCode{
+    Ok,
+    Error
+}
+
+
+class User{
+
++ User(std::string name, std::string number, std::string password)
++ ErrorCode addFriend(std::string friendNumber)
++ ErrorCode setStatus(Status status)
++ ErrorCode sendMessageTo(const User& user, const Message&)
++ ErrorCode blockUser(const User& user, const Message&)
++ ErrorCode receiveMessageFrom(const User& user, const Message& )
+
+
+- std::string userName_;
+- std::string userNumber_;
+- std::string password_
+- Status status_
+}
+
+User *-- Status
+User --> Message
+User --> ErrorCode
+
+class Server{
+- std::vector<User> connectedUsers_
+- std::string ipAddress_
+
+Server(const std::string& ipAddress)
++ ErrorCode sendMessageTo(const User& user, const Message& message)
+
+}
+Server --> User
+Server --> ErrorCode
+
+class Application{
+
+- Database& database_
+- Server& server_
+- void connectToServer()
+- void disconnectFromServer()
+- std::vector<User> users_
++ void run()
++ void login()
++ void logout()
++ ErrorCode addUser(const User& user)
++ ErrorCode deleteUser(const User& user)
+
+
++Application(Database& db, Server& server)
+}
+
+Application o-- Server
+Application o-- Database
+Application --> User
+Application --> ErrorCode
+
+
+class Message {
+- std::string content_
+
++ Message(std::string msg)
++ std::string getMessage()
+}
+
+
+@enduml
