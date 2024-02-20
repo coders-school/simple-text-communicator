@@ -43,6 +43,10 @@ jobs:
     - name: Pre-commit actions
       uses: pre-commit/action@v3.0.1 
 
+    - name: BuildTests
+      # Build your program with the given configuration
+      run: cmake --build ${{env.TEST_BUILD_PATH}} --config ${{env.BUILD_TYPE}}
+
     - name: Test
       working-directory: ${{env.TEST_BUILD_PATH}}
       run: ctest -C ${{env.BUILD_TYPE}}
