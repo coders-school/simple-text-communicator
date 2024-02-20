@@ -6,7 +6,7 @@ repos:
         args: [--style=Google]
         exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$' #auto generated files
       - id: clang-tidy
-        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$' #auto generated files
+        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$|^communicator/tests/exampleTest.cpp$' #auto generated files
       - id: cppcheck
       - id: include-what-you-use
-        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$' #auto generated files
+        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$|^communicator/tests/exampleTest.cpp$' #auto generated files
