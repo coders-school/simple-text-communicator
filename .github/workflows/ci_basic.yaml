@@ -41,7 +41,10 @@ jobs:
         sudo apt-get install -y iwyu
 
     - name: Pre-commit actions
-      uses: pre-commit/action@v3.0.1 
+      uses: pre-commit/action@v3.0.1
+
+    - name: Configure Test CMake
+      run: cmake -B ${{env.TEST_BUILD_PATH}} -S ${{env.TEST_SOURCE}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}      
 
     - name: BuildTests
       # Build your program with the given configuration
