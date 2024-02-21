@@ -1,0 +1,57 @@
+name: Basic CI ubuntu
+
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  BUILD_PATH: ${{github.workspace}}/communicator/build
+  SOURCE: ${{github.workspace}}/communicator
+  TEST_BUILD_PATH: ${{github.workspace}}/communicator/tests/build
+  TEST_SOURCE: ${{github.workspace}}/communicator/tests
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3  # Installs Qt.
+      with:
+        version: '6.2.1'  # The version of Qt to install.
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.14
+      with:
+        cmake-version: '3.22.1'
+
+    - name: Configure CMake
+      run: cmake -B ${{env.BUILD_PATH}} -S ${{env.SOURCE}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{env.BUILD_PATH}} --config ${{env.BUILD_TYPE}}
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm cppcheck
+        sudo apt-get install -y iwyu
+
+    - name: Pre-commit actions
+      uses: pre-commit/action@v3.0.1
+
+    - name: Configure Test CMake
+      run: cmake -B ${{env.TEST_BUILD_PATH}} -S ${{env.TEST_SOURCE}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}      
+
+    - name: BuildTests
+      # Build your program with the given configuration
+      run: cmake --build ${{env.TEST_BUILD_PATH}} --config ${{env.BUILD_TYPE}}
+
+    - name: Test
+      working-directory: ${{env.TEST_BUILD_PATH}}
+      run: ctest -C ${{env.BUILD_TYPE}}
+    

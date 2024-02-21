@@ -4,9 +4,9 @@ repos:
     hooks:
       - id: clang-format
         args: [--style=Google]
+        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$' #auto generated files
       - id: clang-tidy
-      - id: oclint
-      - id: uncrustify
+        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$|^communicator/tests/exampleTest.cpp$' #auto generated files
       - id: cppcheck
-      - id: cpplint
       - id: include-what-you-use
+        exclude: '^communicator/main.cpp$|^communicator/mainwindow.cpp$|^communicator/mainwindow.h$|^communicator/tests/exampleTest.cpp$' #auto generated files
