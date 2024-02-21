@@ -8,6 +8,7 @@ env:
   BUILD_PATH: ${{github.workspace}}/communicator/build
   SOURCE: ${{github.workspace}}/communicator
   TEST_BUILD_PATH: ${{github.workspace}}/communicator/tests/build
+  TEST_SOURCE: ${{github.workspace}}/communicator/tests
 
 
 jobs:
