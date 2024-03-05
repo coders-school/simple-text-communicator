@@ -1,0 +1,23 @@
+name: Pre-commit ubuntu
+
+on: [push, pull_request]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm cppcheck
+        sudo apt-get install -y iwyu
+
+    - name: Pre-commit actions
+      uses: pre-commit/action@v3.0.1
+      

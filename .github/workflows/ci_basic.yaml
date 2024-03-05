@@ -35,15 +35,6 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{env.BUILD_PATH}} --config ${{env.BUILD_TYPE}}
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y llvm cppcheck
-        sudo apt-get install -y iwyu
-
-    - name: Pre-commit actions
-      uses: pre-commit/action@v3.0.1
-
     - name: Configure Test CMake
       run: cmake -B ${{env.TEST_BUILD_PATH}} -S ${{env.TEST_SOURCE}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}      
 
