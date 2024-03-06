@@ -7,4 +7,4 @@ AllowShortIfStatementsOnASingleLine: Never
 IndentCaseLabels: false
 ColumnLimit: 120
 AccessModifierOffset: -4
-InsertNewlineAtEOF: true
+AlwaysBreakAfterDefinitionReturnType: All
