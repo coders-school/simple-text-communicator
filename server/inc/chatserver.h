@@ -1,17 +1,17 @@
 #ifndef CHATSERVER_H
 #define CHATSERVER_H
 
-#include <QAbstractSocket>
-#include <QDebug>
-#include <QObject>
-#include <QTcpServer>
-#include <QTcpSocket>
-#include <QUrl>
+#include <QCoreApplication>
 #include <QtHttpServer/QHttpServer>
-#include <QtHttpServer/QHttpServerRequest>
-#include <QtHttpServer/QHttpServerResponse>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
+#include <QHttpServerResponder>
+#include "message.h"
 
-constexpr uint16_t serverPort = 3000;
+constexpr uint16_t serverPort = 2000;
 
 class ChatServer : public QObject {
     Q_OBJECT
@@ -23,7 +23,8 @@ signals:
 public slots:
 
 private:
-
+    QHttpServer m_server;
+    QVector<Message> m_messages;
 };
 
 #endif  // CHATSERVER_H
