@@ -21,14 +21,9 @@ public:
 signals:
 
 public slots:
-    void start();
-    void quit();
-    void newConnection();
-    void disconnected();
-    void readyRead();
 
 private:
-    QTcpServer server;
+
 };
 
 #endif  // CHATSERVER_H
