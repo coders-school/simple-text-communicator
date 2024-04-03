@@ -15,7 +15,7 @@ ChatServer::ChatServer(quint16 port, QObject *parent)
     if(m_webSocketServer->listen(QHostAddress::Any, port))
     {
         qInfo() << "Server listening on port " << port;
-        connect(&*m_webSocketServer, &QWebSocketServer::newConnection, this, &ChatServer::onNewConnection);
+        connect(m_webSocketServer, &QWebSocketServer::newConnection, this, &ChatServer::onNewConnection);
     }
 }
 
