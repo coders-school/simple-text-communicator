@@ -1,15 +1,14 @@
 #pragma once
 
+#include <QDebug>
 #include <QObject>
 #include <QWebSocketServer>
 #include <QtWebSockets>
-#include <QDebug>
 
-class ChatServer : public QObject
-{
+class ChatServer : public QObject {
     Q_OBJECT
 public:
-    explicit ChatServer(quint16 port, QObject *parent = nullptr);
+    explicit ChatServer(quint16 port, QObject* parent = nullptr);
     ~ChatServer() override;
 
 private slots:
@@ -18,6 +17,6 @@ private slots:
     void socketDisconnected();
 
 private:
-    QWebSocketServer* m_webSocketServer;
-    QList<QWebSocket*> m_clients;
+    std::unique_ptr<QWebSocketServer> m_webSocketServer;
+    std::vector<std::unique_ptr<QWebSocket*>> m_clients;
 };
