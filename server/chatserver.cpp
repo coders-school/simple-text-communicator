@@ -38,5 +38,4 @@ void ChatServer::socketDisconnected() {
     qInfo() << getIdentifier(*client) << " disconnected!";
     if (client) {
         m_clients.erase(std::remove(std::begin(m_clients), std::end(m_clients), client), std::end(m_clients));
-    }
 }

@@ -5,10 +5,11 @@
 #include <QWebSocketServer>
 #include <QtWebSockets>
 
-class ChatServer : public QObject {
+class ChatServer : public QObject
+{
     Q_OBJECT
 public:
-    explicit ChatServer(quint16 port, QObject* parent = nullptr);
+    explicit ChatServer(quint16 port, QObject *parent = nullptr);
     ~ChatServer() override;
 
 private slots:
