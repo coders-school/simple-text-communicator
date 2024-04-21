@@ -6,7 +6,7 @@ ApplicationWindow {
     visible: true
     width: 800
     height: 600
-    title: "Login/Register"
+    title: "Simple Text Communicator"
 
     StackView {
         id: stackView
