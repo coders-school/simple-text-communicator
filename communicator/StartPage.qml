@@ -11,7 +11,6 @@ Item {
             text: "Simple Text Communicator"
             font.pixelSize: 40
             color: "black"
-            // anchors.horizontalCenter: parent.horizontalCenter
             Layout.alignment: Qt.AlignHCenter
         }
 
@@ -30,12 +29,7 @@ Item {
         // }
 
         RowLayout {
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                bottom: parent.bottom
-
-            }
-
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             spacing: 10
 
             Item {
